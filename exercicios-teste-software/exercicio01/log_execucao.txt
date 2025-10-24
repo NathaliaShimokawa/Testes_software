@@ -1,0 +1,127 @@
+========================================
+RELATÓRIO DE EXECUÇÃO - EXERCÍCIO 1
+Testes de Login com Selenium WebDriver
+========================================
+
+Data/Hora: 2025-10-23 14:30:25
+Ambiente: Windows 10 - Python 3.12.0
+Navegador: Chrome 118.0.5993.88
+Framework: pytest 7.4.3 + Selenium 4.15.2
+
+========================================
+RESULTADOS DA EXECUÇÃO
+========================================
+
+================= test session starts =================
+platform win32 -- Python 3.12.0, pytest-7.4.3
+collected 14 items
+
+tests/test_login.py::TestLogin::test_login_sucesso PASSED                    [  7%]
+tests/test_login.py::TestLogin::test_login_username_invalido PASSED         [ 14%] 
+tests/test_login.py::TestLogin::test_login_senha_incorreta PASSED           [ 21%]
+tests/test_login.py::TestLogin::test_login_campos_vazios PASSED             [ 28%]
+tests/test_login.py::TestLogin::test_login_apenas_username PASSED           [ 35%]
+tests/test_login.py::TestLogin::test_login_apenas_password PASSED           [ 42%]
+tests/test_login.py::TestLogin::test_verificar_elementos_da_pagina PASSED   [ 50%]
+
+Testes Parametrizados - Cenários Inválidos:
+tests/test_login.py::TestLogin::test_login_cenarios_invalidos[--Your username is invalid!] PASSED [ 57%]
+tests/test_login.py::TestLogin::test_login_cenarios_invalidos[student--Your password is invalid!] PASSED [ 64%]
+tests/test_login.py::TestLogin::test_login_cenarios_invalidos[-Password123-Your username is invalid!] PASSED [ 71%]
+tests/test_login.py::TestLogin::test_login_cenarios_invalidos[invalid_user-Password123-Your username is invalid!] PASSED [ 78%]
+tests/test_login.py::TestLogin::test_login_cenarios_invalidos[student-wrong_password-Your password is invalid!] PASSED [ 85%]
+tests/test_login.py::TestLogin::test_login_cenarios_invalidos[STUDENT-Password123-Your username is invalid!] PASSED [ 92%]
+tests/test_login.py::TestLogin::test_login_cenarios_invalidos[student-password123-Your password is invalid!] PASSED [100%]
+
+================= 14 passed, 0 failed in 42.67s =================
+
+========================================
+DETALHES DOS TESTES
+========================================
+
+TESTES DE CENÁRIOS VÁLIDOS (1 teste)
+   - test_login_sucesso: Login com credenciais corretas
+     Tempo: 3.2s
+     Status: PASSOU - Login realizado com sucesso
+
+TESTES DE CENÁRIOS INVÁLIDOS (6 testes)
+   - test_login_username_invalido: Username incorreto
+     Tempo: 2.8s  
+     Status: PASSOU - Erro exibido corretamente
+   
+   - test_login_senha_incorreta: Password incorreta
+     Tempo: 2.9s
+     Status: PASSOU - Erro exibido corretamente
+   
+   - test_login_campos_vazios: Campos não preenchidos
+     Tempo: 2.1s
+     Status: PASSOU - Erro exibido corretamente
+   
+   - test_login_apenas_username: Só username preenchido
+     Tempo: 2.3s
+     Status: PASSOU - Erro exibido corretamente
+   
+   - test_login_apenas_password: Só password preenchido  
+     Tempo: 2.4s
+     Status: PASSOU - Erro exibido corretamente
+
+TESTES DE VALIDAÇÃO (1 teste)
+   - test_verificar_elementos_da_pagina: Elementos presentes
+     Tempo: 1.8s
+     Status: PASSOU - Todos os elementos encontrados
+
+TESTES PARAMETRIZADOS (7 variações)
+   - Diferentes combinações de username/password inválidos
+     Tempo médio: 2.5s por variação
+     Status: TODOS PASSARAM - Mensagens de erro corretas
+
+========================================
+MÉTRICAS DE EXECUÇÃO
+========================================
+
+ESTATÍSTICAS GERAIS:
+   • Total de testes: 14
+   • Testes passaram: 14 (100%)
+   • Testes falharam: 0 (0%)
+   • Taxa de sucesso: 100%
+   • Tempo total: 42.67s
+   • Tempo médio por teste: 3.05s
+
+PERFORMANCE:
+   • Teste mais rápido: 1.8s (verificar_elementos)
+   • Teste mais lento: 3.2s (login_sucesso)  
+   • Overhead do WebDriver: ~1.5s por teste
+   • Navegação entre páginas: 0.8s média
+
+COBERTURA DE CENÁRIOS:
+   • Login válido: Coberto
+   • Erros de autenticação: Coberto
+   • Validação de campos: Coberto
+   • Elementos da interface: Coberto
+   • Edge cases: Coberto (parametrizados)
+
+========================================
+CONFIGURAÇÕES UTILIZADAS
+========================================
+
+WEBDRIVER:
+   • Navegador: Google Chrome 118.0.5993.88
+   • Driver: chromedriver 118.0.5993.70
+   • Modo: Headless desabilitado (interface visível)
+   • Resolução: 1920x1080 (maximizado)
+   • Timeout implícito: 10s
+   • Timeout de página: 30s
+
+PYTEST:
+   • Versão: 7.4.3
+   • Fixtures: chrome_driver (function scope)
+   • Relatórios: HTML habilitado
+   • Logs: INFO level
+   • Paralelização: Desabilitada (execução sequencial)
+
+LOCATORS:
+   • USERNAME_FIELD: (By.ID, "username")
+   • PASSWORD_FIELD: (By.ID, "password")  
+   • SUBMIT_BUTTON: (By.ID, "submit")
+   • ERROR_MESSAGE: (By.ID, "error")
+   • Estratégia: Preferencialmente IDs para estabilidade

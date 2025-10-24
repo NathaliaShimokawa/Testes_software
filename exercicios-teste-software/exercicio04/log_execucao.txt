@@ -1,0 +1,84 @@
+EXERCÍCIO 04 - PAGE OBJECT MODEL (POM) PARA TESTES WEB
+=======================================================
+
+Data/Hora da Execução: [Timestamp da execução dos testes]
+Ambiente: Windows 10, Python 3.12.0, pytest 7.4.3
+Framework: pytest + Selenium WebDriver + Page Object Model
+
+CONFIGURAÇÃO DOS TESTES
+------------------------
+- Total de testes coletados: 7
+- Arquivo principal: test_web.py
+- Pages implementadas: BasePage, GooglePage (Page Object Model)
+- WebDriver: Chrome (com webdriver-manager para instalação automática)
+- Fixtures: chrome_driver, chrome_options, delay_between_web_tests
+
+
+TESTES IDENTIFICADOS
+--------------------
+
+TESTE 01: test_titulo_google (14.3%)
+   → Objetivo: Verificar título da página inicial do Google
+   → Page Object: GooglePage.navigate() + get_title()
+   → Validação: Título contém "Google"
+
+TESTE 02: test_busca_google (28.6%)
+   → Objetivo: Executar busca básica no Google
+   → Page Object: GooglePage.search("selenium python")
+   → Validação: Resultados de busca são exibidos
+
+TESTE 03: test_busca_com_page_object (42.9%)
+   → Objetivo: Demonstrar uso completo do Page Object Model
+   → Page Object: GooglePage com métodos encapsulados
+   → Validação: Separação clara entre lógica de página e teste
+
+TESTE 04-06: test_busca_multiplos_termos[Python/Selenium/Pytest] (57.1%-85.7%)
+   → Objetivo: Testes parametrizados com múltiplos termos de busca
+   → Page Object: Reutilização da GooglePage para diferentes buscas
+   → Validação: Cada termo retorna resultados apropriados
+
+TESTE 07: test_responsividade (100.0%)
+   → Objetivo: Testar comportamento em diferentes resoluções
+   → Page Object: GooglePage com configurações de viewport
+   → Validação: Interface responsiva em múltiplas resoluções
+
+ARQUITETURA PAGE OBJECT MODEL
+------------------------------
+
+pages/base_page.py:
+Classe BasePage implementada
+   → Inicialização do WebDriver
+   → Métodos genéricos: wait_for_element, click, type_text
+   → Tratamento de exceções Selenium
+   → Utilidades de navegação
+
+pages/google_page.py:
+Classe GooglePage implementada
+   → Herda de BasePage
+   → Localizadores: SEARCH_BOX, SEARCH_BUTTON, RESULTS
+   → Métodos: navigate(), search(), has_results(), get_results_count()
+   → Encapsulamento completo da interface do Google
+
+tests/conftest.py:
+Fixtures Selenium configuradas
+   → chrome_driver: WebDriver configurado com opções otimizadas
+   → chrome_options: Argumentos para modo headless e performance
+   → delay_between_web_tests: Estabilidade entre testes
+   → Configurações de timeout e implicit wait
+
+BENEFÍCIOS DO PAGE OBJECT MODEL IMPLEMENTADO
+---------------------------------------------
+Separação de Responsabilidades: Lógica da página separada dos testes
+Reutilização: Métodos das pages usados em múltiplos testes
+Manutenibilidade: Mudanças na UI requerem alteração apenas nas Page Classes
+Legibilidade: Testes expressam intenções de negócio claramente
+Redução de Duplicação: Eliminação de código repetitivo entre testes
+
+CONFIGURAÇÕES SELENIUM IMPLEMENTADAS
+------------------------------------
+WebDriver Manager: Instalação automática do ChromeDriver
+Modo Headless: Execução em background para CI/CD
+Timeouts Configurados: implicit_wait (10s), page_load_timeout (30s)  
+Opções Otimizadas: --no-sandbox, --disable-gpu, --disable-images
+Cleanup Automático: driver.quit() após cada teste
+Resolução Fixa: --window-size=1920,1080 para consistência

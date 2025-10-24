@@ -1,0 +1,39 @@
+# ========================================
+# DEPENDÊNCIAS PARA EXERCÍCIOS DE TESTE DE SOFTWARE
+# ========================================
+#
+# Este arquivo contém todas as dependências necessárias
+# para executar os 5 exercícios de automação de testes.
+
+# =====================================
+# FRAMEWORK DE TESTES
+# =====================================
+pytest==7.4.3                    # Framework principal de testes Python
+pytest-html==4.1.1              # Geração de relatórios HTML
+pytest-cov==4.1.0               # Cobertura de código
+pytest-xdist==3.5.0             # Execução paralela de testes
+pytest-mock==3.12.0             # Mocking avançado
+
+# =====================================
+# AUTOMAÇÃO WEB (SELENIUM)
+# =====================================
+selenium==4.15.2                # WebDriver para automação de navegadores
+webdriver-manager==4.0.1        # Gerenciamento automático de drivers
+
+# =====================================
+# TESTES DE API REST
+# =====================================
+requests==2.31.0                # Cliente HTTP para requisições REST
+jsonschema==4.20.0              # Validação de schemas JSON
+urllib3==2.1.0                  # Biblioteca HTTP (compatibilidade)
+
+# =====================================
+# UTILITÁRIOS DE VALIDAÇÃO
+# =====================================
+email-validator==2.1.0          # Validação de formatos de email
+certifi==2023.11.17             # Certificados SSL atualizados
+
+# =====================================
+# COMPATIBILIDADE E ENCODING
+# =====================================
+charset-normalizer==3.3.2       # Normalização de encoding de texto

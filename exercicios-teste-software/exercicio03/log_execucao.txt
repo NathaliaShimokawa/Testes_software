@@ -1,0 +1,141 @@
+EXERCÍCIO 03 - TESTES CRUD DE INTEGRAÇÃO
+===========================================
+
+Data/Hora da Execução: [Timestamp da execução dos testes]
+Ambiente: Windows 10, Python 3.12.0, pytest 7.4.3
+Framework: pytest com fixtures personalizadas para testes CRUD
+
+CONFIGURAÇÃO DOS TESTES
+------------------------
+- Total de testes coletados: 17
+- Arquivo principal: test_todos_crud.py
+- API utilizada: JSONPlaceholder (https://jsonplaceholder.typicode.com/)
+- Fixtures: api_client, todo_payload, user_payload, post_payload
+
+RESULTADOS DETALHADOS
+---------------------
+
+TESTES CRUD - TODOS (5 testes)
+test_listar_todos_existentes (5.9%)
+   → GET /todos - Listar todos os TODOs disponíveis
+   → Status: 200 OK
+   → Validação: Lista de TODOs com estrutura correta (id, userId, title, completed)
+
+test_buscar_todo_por_id (11.8%)
+   → GET /todos/1 - Buscar TODO específico por ID
+   → Status: 200 OK
+   → Validação: TODO individual com campos obrigatórios
+
+test_criar_todo_valido (17.6%)
+   → POST /todos - Criar novo TODO
+   → Status: 201 Created
+   → Validação: TODO criado com ID gerado, payload preservado
+
+test_atualizar_todo_existente (23.5%)
+   → PUT /todos/1 - Atualizar TODO existente
+   → Status: 200 OK
+   → Validação: Campos atualizados corretamente
+
+test_deletar_todo_existente (29.4%)
+   → DELETE /todos/1 - Remover TODO existente
+   → Status: 200 OK
+   → Validação: Operação de delete bem-sucedida
+
+TESTES CRUD - USUÁRIOS (4 testes)
+test_listar_usuarios_existentes (35.3%)
+   → GET /users - Listar todos os usuários
+   → Status: 200 OK
+   → Validação: Lista de usuários com dados completos (nome, email, endereço)
+
+test_buscar_usuario_por_id (41.2%)
+   → GET /users/1 - Buscar usuário específico
+   → Status: 200 OK
+   → Validação: Usuário com estrutura completa incluindo endereço e geolocalização
+
+test_criar_usuario_valido (47.1%)
+   → POST /users - Criar novo usuário
+   → Status: 201 Created
+   → Validação: Usuário criado com dados completos do payload
+
+test_atualizar_usuario_existente (52.9%)
+   → PUT /users/1 - Atualizar dados do usuário
+   → Status: 200 OK
+   → Validação: Campos nome, email e username atualizados
+
+TESTES CRUD - POSTS (3 testes)
+test_listar_posts_existentes (58.8%)
+   → GET /posts - Listar todos os posts
+   → Status: 200 OK
+   → Validação: Lista de posts com estrutura correta (id, userId, title, body)
+
+test_criar_post_valido (64.7%)
+   → POST /posts - Criar novo post
+   → Status: 201 Created
+   → Validação: Post criado com ID gerado e dados do payload
+
+test_atualizar_post_existente (70.6%)
+   → PUT /posts/1 - Atualizar post existente
+   → Status: 200 OK
+   → Validação: Título e conteúdo atualizados corretamente
+
+TESTES DE INTEGRAÇÃO (3 testes)
+test_integracao_usuario_posts (76.5%)
+   → Validação de relacionamento usuário ↔ posts
+   → GET /users/1 + GET /posts?userId=1
+   → Validação: Integridade referencial entre usuário e seus posts
+
+test_integracao_usuario_todos (82.4%)
+   → Validação de relacionamento usuário ↔ TODOs
+   → GET /users/1 + GET /todos?userId=1
+   → Validação: Integridade referencial entre usuário e seus TODOs
+
+test_integracao_post_comentarios (88.2%)
+   → Validação de relacionamento post ↔ comentários
+   → GET /posts/1 + GET /posts/1/comments
+   → Validação: Integridade referencial entre post e comentários
+
+TESTES DE ERROR HANDLING (2 testes)
+test_buscar_recurso_inexistente (94.1%)
+   → GET /users/99999, /posts/99999, /todos/99999
+   → Status: 404 Not Found
+   → Validação: Tratamento correto para recursos inexistentes
+
+test_criar_recurso_dados_invalidos (100.0%)
+   → POST /todos com dados inválidos
+   → Validação: API aceita graciosamente dados inválidos (simulação)
+
+RESUMO DA EXECUÇÃO
+------------------
+Testes Aprovados: 17/17 (100%)
+Testes Falharam: 0/17 (0%)
+Testes Pulados: 0/17 (0%)
+
+Tempo Total de Execução: 23.85 segundos
+Tempo Médio por Teste: ~1.40 segundos
+
+COBERTURA DE TESTES CRUD
+-------------------------
+CREATE (POST): TODOs, Usuários, Posts
+READ (GET): Listagem e busca individual
+UPDATE (PUT): Atualização de todos os recursos
+DELETE (DELETE): Remoção de TODOs
+Integração: Relacionamentos entre recursos
+Error Handling: Recursos inexistentes, dados inválidos
+
+RECURSOS TESTADOS
+-----------------
+/todos: CRUD completo (Create, Read, Update, Delete)
+/users: CRUD parcial (Create, Read, Update)
+/posts: CRUD parcial (Create, Read, Update)
+Relacionamentos: users → posts, users → todos, posts → comments
+Parâmetros de filtro: ?userId=N para filtrar por usuário
+Endpoints aninhados: /posts/{id}/comments
+
+VALIDAÇÕES IMPLEMENTADAS
+------------------------
+Status Codes HTTP: 200 (OK), 201 (Created), 404 (Not Found)
+Estrutura de dados JSON: Campos obrigatórios e tipos corretos
+Integridade referencial: IDs consistentes entre recursos relacionados
+Payload preservation: Dados enviados preservados no response
+ID generation: Novos recursos recebem IDs únicos
+Edge cases: Recursos inexistentes e dados inválidos

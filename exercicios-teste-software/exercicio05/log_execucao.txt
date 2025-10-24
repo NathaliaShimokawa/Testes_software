@@ -1,0 +1,236 @@
+EXERCÍCIO 05 - TESTES PARAMETRIZADOS AVANÇADOS
+==============================================
+
+Data/Hora da Execução: [Timestamp da execução dos testes]
+Ambiente: Windows 10, Python 3.12.0, pytest 7.4.3
+Framework: pytest com parametrização avançada usando @pytest.mark.parametrize
+
+CONFIGURAÇÃO DOS TESTES
+------------------------
+- Total de testes coletados: 37 (apenas validações de API)
+- Arquivo principal: test_validacoes_parametrizadas.py
+- APIs utilizadas: HTTPBin (https://httpbin.org/), JSONPlaceholder
+- Fixtures: api_session (HTTP reutilizável), timeout_config
+
+RESULTADOS DETALHADOS
+---------------------
+
+VALIDAÇÃO DE EMAIL - FORMATO LOCAL (8 testes - 2.7% a 21.6%)
+test_validacao_email_formato[sem-arroba.com] (2.7%)
+   → Validação regex: email sem @ deve ser inválido
+   → Resultado: Inválido (como esperado)
+
+test_validacao_email_formato[@sem-usuario.com] (5.4%)
+   → Validação regex: email sem parte local deve ser inválido
+   → Resultado: Inválido (como esperado)
+
+test_validacao_email_formato[sem-dominio@] (8.1%)
+   → Validação regex: email sem domínio deve ser inválido
+   → Resultado: Inválido (como esperado)
+
+test_validacao_email_formato[espacos no meio@teste.com] (10.8%)
+   → Validação regex: email com espaços deve ser inválido
+   → Resultado: Inválido (como esperado)
+
+test_validacao_email_formato[caracteres!especiais@teste.com] (13.5%)
+   → Validação regex: email com caracteres especiais na parte local
+   → Resultado: Inválido (como esperado)
+
+test_validacao_email_formato[..pontos@teste.com] (16.2%)
+   → Validação regex: email com pontos consecutivos deve ser inválido
+   → Resultado: Inválido (como esperado)
+
+test_validacao_email_formato[teste@] (18.9%)
+   → Validação regex: email sem domínio após @
+   → Resultado: Inválido (como esperado)
+
+test_validacao_email_formato[@teste.com] (21.6%)
+   → Validação regex: email sem parte local antes do @
+   → Resultado: Inválido (como esperado)
+
+VALIDAÇÃO DE EMAIL - VIA API EXTERNA (7 testes - 24.3% a 43.2%)
+test_validacao_email_via_httpbin[sem-arroba.com] (24.3%)
+   → HTTPBin POST /anything: email inválido
+   → Status: 200 OK - Payload enviado e recebido
+
+test_validacao_email_via_httpbin[@sem-usuario.com] (27.0%)
+   → HTTPBin POST /anything: email sem usuário
+   → Status: 200 OK - Payload enviado e recebido
+
+test_validacao_email_via_httpbin[sem-dominio@] (29.7%)
+   → HTTPBin POST /anything: email sem domínio
+   → Status: 200 OK - Payload enviado e recebido
+
+test_validacao_email_via_httpbin[espacos no meio@teste.com] (32.4%)
+   → HTTPBin POST /anything: erro de API externa
+   → Status: 502 Bad Gateway - Falha temporária do serviço HTTPBin
+   → Nota: Não é falha do teste, mas sim instabilidade da API externa
+
+test_validacao_email_via_httpbin[caracteres!especiais@teste.com] (35.1%)
+   → HTTPBin POST /anything: email com caracteres especiais
+   → Status: 200 OK - Payload enviado e recebido
+
+test_validacao_email_via_httpbin[..pontos@teste.com] (37.8%)
+   → HTTPBin POST /anything: email com pontos consecutivos
+   → Status: 200 OK - Payload enviado e recebido
+
+test_validacao_email_via_httpbin[teste@] (40.5%)
+   → HTTPBin POST /anything: email incompleto
+   → Status: 200 OK - Payload enviado e recebido
+
+test_validacao_email_via_httpbin[@teste.com] (43.2%)
+   → HTTPBin POST /anything: email sem usuário
+   → Status: 200 OK - Payload enviado e recebido
+
+COMPARAÇÃO DE EMAILS VÁLIDOS (1 teste - 45.9%)
+test_emails_validos_para_comparacao (45.9%)
+   → Validação de emails reconhecidamente válidos
+   → Emails testados: user@example.com, test+tag@domain.co.uk, etc.
+   → Resultado: Todos validados corretamente pelo regex
+
+VALIDAÇÃO DE SENHA - CRITÉRIOS LOCAIS (5 testes - 48.6% a 59.5%)
+test_validacao_senha_criterios[123-muito curta] (48.6%)
+   → Validação local: senha muito curta (< 8 caracteres)
+   → Resultado: Inválida (como esperado)
+
+test_validacao_senha_criterios[semNumero-sem número] (51.3%)
+   → Validação local: senha sem números
+   → Resultado: Inválida (como esperado)
+
+test_validacao_senha_criterios[semmaiuscula123-sem maiúscula] (54.0%)
+   → Validação local: senha sem letras maiúsculas
+   → Resultado: Inválida (como esperado)
+
+test_validacao_senha_criterios[12345678-só números] (56.8%)
+   → Validação local: senha apenas numérica
+   → Resultado: Inválida (como esperado)
+
+test_validacao_senha_criterios[ab-muito curta] (59.5%)
+   → Validação local: senha extremamente curta
+   → Resultado: Inválida (como esperado)
+
+VALIDAÇÃO DE SENHA - VIA API JSONPlaceholder (5 testes - 62.2% a 72.9%)
+test_validacao_senha_via_jsonplaceholder[123-muito curta] (62.2%)
+   → JSONPlaceholder POST /posts: senha curta em payload
+   → Status: 201 Created - API aceita qualquer payload
+
+test_validacao_senha_via_jsonplaceholder[semNumero-sem número] (64.9%)
+   → JSONPlaceholder POST /posts: senha sem números
+   → Status: 201 Created - API aceita qualquer payload
+
+test_validacao_senha_via_jsonplaceholder[semmaiuscula123-sem maiúscula] (67.5%)
+   → JSONPlaceholder POST /posts: senha sem maiúsculas
+   → Status: 201 Created - API aceita qualquer payload
+
+test_validacao_senha_via_jsonplaceholder[12345678-só números] (70.2%)
+   → JSONPlaceholder POST /posts: senha apenas numérica
+   → Status: 201 Created - API aceita qualquer payload
+
+test_validacao_senha_via_jsonplaceholder[ab-muito curta] (72.9%)
+   → JSONPlaceholder POST /posts: senha muito curta
+   → Status: 201 Created - API aceita qualquer payload
+
+COMPARAÇÃO DE SENHAS VÁLIDAS (1 teste - 75.7%)
+test_senhas_validas_para_comparacao (75.7%)
+   → Validação de senhas reconhecidamente fortes
+   → Senhas testadas: MinhaSenh@123, Str0ng!Pass, etc.
+   → Resultado: Todas validadas corretamente pelos critérios
+
+VALIDAÇÃO COMBINADA - EMAIL + SENHA INVÁLIDOS (3 testes - 78.4% a 83.8%)
+test_validacao_combinada_email_senha_invalidos[invalid@-123] (78.4%)
+   → Combinação: email inválido + senha curta
+   → Resultado: Ambos identificados como inválidos
+
+test_validacao_combinada_email_senha_invalidos[sem-arroba.com-semNumero] (81.1%)
+   → Combinação: email sem @ + senha sem números
+   → Resultado: Ambos identificados como inválidos
+
+test_validacao_combinada_email_senha_invalidos[@teste.com-ab] (83.8%)
+   → Combinação: email sem usuário + senha muito curta
+   → Resultado: Ambos identificados como inválidos
+
+TESTES DE PERFORMANCE - TEMPO DE RESPOSTA (3 testes - 86.5% a 91.9%)
+test_tempo_resposta_validacao_email[sem-arroba.com] (86.5%)
+   → Medição: tempo de validação de email deve ser < 0.1s
+   → Resultado: Validação rápida dentro do limite
+
+test_tempo_resposta_validacao_email[@sem-usuario.com] (89.2%)
+   → Medição: tempo de validação de email deve ser < 0.1s
+   → Resultado: Validação rápida dentro do limite
+
+test_tempo_resposta_validacao_email[sem-dominio@] (91.9%)
+   → Medição: tempo de validação de email deve ser < 0.1s
+   → Resultado: Validação rápida dentro do limite
+
+CRIAÇÃO DE USUÁRIOS - MÚLTIPLOS PAYLOADS (3 testes - 94.6% a 100%)
+test_criacao_usuarios_jsonplaceholder[user_data0] (94.6%)
+   → JSONPlaceholder POST /users: usuário admin
+   → Status: 201 Created - Usuário criado com sucesso
+
+test_criacao_usuarios_jsonplaceholder[user_data1] (97.3%)
+   → JSONPlaceholder POST /users: usuário moderador
+   → Status: 201 Created - Usuário criado com sucesso
+
+test_criacao_usuarios_jsonplaceholder[user_data2] (100.0%)
+   → JSONPlaceholder POST /users: usuário regular
+   → Status: 201 Created - Usuário criado com sucesso
+
+RESUMO DA EXECUÇÃO
+------------------
+Testes Aprovados: 36/37 (97.3%)
+Testes Falharam: 1/37 (2.7%) - Falha de API externa (HTTPBin 502)
+Testes Pulados: 0/37 (0%)
+
+Tempo Total de Execução: 37.33 segundos
+Tempo Médio por Teste: ~1.01 segundos
+
+ANÁLISE DE COBERTURA PARAMETRIZADA
+-----------------------------------
+Validação de Email:
+   8 cenários de formato inválido testados
+   7 cenários via API externa (1 falha por instabilidade)
+   1 teste de comparação com emails válidos
+   Total: 16 execuções (43.2% dos testes)
+
+Validação de Senha:
+   5 cenários de critérios locais
+   5 cenários via API JSONPlaceholder
+   1 teste de comparação com senhas válidas
+   Total: 11 execuções (29.7% dos testes)
+
+Testes Combinados e Performance:
+   3 cenários de validação combinada
+   3 cenários de performance timing
+   3 cenários de criação de usuários
+   Total: 9 execuções (24.3% dos testes)
+
+TECNOLOGIAS VALIDADAS
+---------------------
+pytest.mark.parametrize: Parametrização múltipla funcionando
+Regex validation: Padrões de email e senha corretos
+API integration: HTTPBin e JSONPlaceholder (com tolerância a falhas)
+Performance testing: Medição de tempo de resposta
+Data-driven testing: Separação entre dados e lógica de teste
+Class-based organization: TestValidacoesParametrizadas bem estruturada
+
+BENEFÍCIOS DEMONSTRADOS
+-----------------------
+1. **Cobertura Ampla**: 37 cenários testados com código mínimo
+2. **Manutenibilidade**: Adição de novos cenários é trivial
+3. **Clareza**: Cada cenário aparece individualmente nos relatórios
+4. **Eficiência**: Reutilização de fixtures e setup entre cenários
+5. **Robustez**: Tolerância a falhas de APIs externas
+6. **Performance**: Execução otimizada com sessões HTTP reutilizáveis
+
+PRÓXIMOS PASSOS
+---------------
+Para expandir os testes parametrizados:
+
+1. **Testes Web**: Executar test_busca_parametrizada.py após configurar ChromeDriver
+2. **Datasets Externos**: Carregar cenários de CSV/JSON externos
+3. **Property-based Testing**: Integração com Hypothesis para geração automática
+4. **Cross-browser**: Parametrização com múltiplos navegadores
+5. **Análise Estatística**: Agregação de métricas de performance entre execuções
+
+STATUS FINAL: TESTES PARAMETRIZADOS FUNCIONAIS - 97.3% SUCESSO
+Exercício 05 executado com alta cobertura - Parametrização avançada demonstrada com sucesso

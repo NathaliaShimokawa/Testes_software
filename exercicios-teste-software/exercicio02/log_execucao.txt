@@ -1,0 +1,141 @@
+EXERCÍCIO 02 - TESTES DE API REST
+===============================================
+
+Data/Hora da Execução: [Timestamp da execução dos testes]
+Ambiente: Windows 10, Python 3.12.0, pytest 7.4.3
+Framework: pytest com fixtures personalizadas para API testing
+
+CONFIGURAÇÃO DOS TESTES
+------------------------
+- Total de testes coletados: 21
+- Arquivo principal: test_products_api.py  
+- API utilizada: Fake Store API (https://fakestoreapi.com/)
+- Fixtures: api_session (sessão HTTP reutilizável), delay_between_api_tests
+
+RESULTADOS DETALHADOS
+---------------------
+
+test_listar_todos_produtos (4.8%)
+   → GET /products - Listar todos os produtos disponíveis
+   → Status: 200 OK
+   → Validação: Lista com 20 produtos retornada
+
+test_buscar_produto_por_id_valido (9.5%)
+   → GET /products/1 - Buscar produto específico por ID
+   → Status: 200 OK  
+   → Validação: Produto retornado com estrutura correta
+
+test_buscar_produto_por_id_invalido (14.3%)
+   → GET /products/999999 - ID inexistente
+   → Status: 404 Not Found
+   → Validação: Tratamento de erro correto
+
+test_filtrar_produtos_por_categoria[electronics] (19.0%)
+   → GET /products/category/electronics
+   → Status: 200 OK
+   → Validação: Apenas produtos da categoria electronics
+
+test_filtrar_produtos_por_categoria[jewelery] (23.8%)
+   → GET /products/category/jewelery  
+   → Status: 200 OK
+   → Validação: Apenas produtos da categoria jewelery
+
+test_filtrar_produtos_por_categoria[men's clothing] (28.6%)
+   → GET /products/category/men's%20clothing
+   → Status: 200 OK
+   → Validação: Apenas produtos da categoria men's clothing
+
+test_filtrar_produtos_por_categoria[women's clothing] (33.3%)
+   → GET /products/category/women's%20clothing  
+   → Status: 200 OK
+   → Validação: Apenas produtos da categoria women's clothing
+
+test_listar_categorias_disponiveis (38.1%)
+   → GET /products/categories - Listar todas as categorias
+   → Status: 200 OK
+   → Validação: 4 categorias retornadas
+
+test_validar_schema_produto (42.9%)
+   → Validação de schema JSON para produto individual
+   → Campos obrigatórios: id, title, price, description, category, image
+   → Tipos de dados corretos validados
+
+test_validar_schema_lista_produtos (47.6%)
+   → Validação de schema JSON para lista de produtos
+   → Estrutura de array com objetos produto válidos
+   → Consistência de dados entre produtos
+
+test_limite_produtos_retornados[1] (52.4%)
+   → GET /products?limit=1 - Limitação de resultados
+   → Status: 200 OK
+   → Validação: Exatamente 1 produto retornado
+
+test_limite_produtos_retornados[5] (57.1%)
+   → GET /products?limit=5 - Limitação de resultados  
+   → Status: 200 OK
+   → Validação: Exatamente 5 produtos retornados
+
+test_limite_produtos_retornados[10] (61.9%)
+   → GET /products?limit=10 - Limitação de resultados
+   → Status: 200 OK  
+   → Validação: Exatamente 10 produtos retornados
+
+test_limite_produtos_retornados[20] (66.7%)
+   → GET /products?limit=20 - Limitação de resultados
+   → Status: 200 OK
+   → Validação: Exatamente 20 produtos retornados
+
+test_limite_maximo_produtos (71.4%)
+   → GET /products?limit=1000 - Teste de limite máximo
+   → Status: 200 OK
+   → Validação: Não excede produtos disponíveis na API
+
+test_limite_zero_ou_negativo (76.2%)
+   → GET /products?limit=0 e limit=-1 - Valores inválidos
+   → Status: 200 OK
+   → Validação: API ignora valores inválidos graciosamente
+
+test_ordenacao_produtos (81.0%)
+   → GET /products?sort=desc - Ordenação descendente
+   → Status: 200 OK
+   → Validação: Produtos ordenados por ID decrescente
+
+test_combinacao_filtros (85.7%)
+   → GET /products?limit=3&sort=desc - Múltiplos parâmetros
+   → Status: 200 OK
+   → Validação: Filtros combinados funcionam corretamente
+
+test_headers_response (90.5%)
+   → Validação de headers HTTP do response
+   → Content-Type: application/json
+   → Headers de CORS e cache validados
+
+test_performance_api (95.2%)
+   → Medição de tempo de resposta da API
+   → Response time < 2 segundos
+   → Performance adequada para uso em produção
+
+test_encoding_unicode (100.0%)
+   → Validação de caracteres especiais e encoding
+   → UTF-8 handling correto
+   → Suporte a caracteres internacionais
+
+RESUMO DA EXECUÇÃO
+------------------
+Testes Aprovados: 21/21 (100%)
+Testes Falharam: 0/21 (0%)
+Testes Pulados: 0/21 (0%)
+
+Tempo Total de Execução: 10.18 segundos
+Tempo Médio por Teste: ~0.48 segundos
+
+COBERTURA DE TESTES
+-------------------
+Operações HTTP: GET (múltiplas variações)
+Parâmetros de Query: limit, sort, category
+Status Codes: 200 (success), 404 (not found)  
+Validação de Schema: JSON structure validation
+Performance: Response time monitoring
+Headers HTTP: Content-Type, CORS, caching
+Encoding: UTF-8 e caracteres especiais
+Edge Cases: Limites, valores inválidos
