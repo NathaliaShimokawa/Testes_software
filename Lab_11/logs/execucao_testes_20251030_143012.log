@@ -1,0 +1,14 @@
+2025-10-30 14:30:12 | ecommerce_tests | INFO | INICIANDO: Teste de Segurança - Rate Limiting
+2025-10-30 14:30:12 | ecommerce_tests | INFO | Configuração: {
+  "base_url": "https://httpbin.org",
+  "timeout": 5,
+  "targets": {
+    "performance_p95_ms": 500,
+    "load_throughput_rps": 2000,
+    "stress_breakpoint_users": 15000,
+    "scalability_efficiency_pct": 80,
+    "security_rate_limit_rpm": 100
+  }
+}
+2025-10-30 14:44:27 | ecommerce_tests | INFO | CONCLUÍDO: Teste de Segurança - Rate Limiting
+2025-10-30 14:44:27 | ecommerce_tests | INFO | Duração: 854.4995248317719s

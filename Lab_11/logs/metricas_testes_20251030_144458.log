@@ -1,0 +1,21 @@
+2025-10-30 14:45:00 | test_metrics | INFO | Demo - Teste de Performance | total_requests: 10
+2025-10-30 14:45:00 | test_metrics | INFO | Demo - Teste de Performance | successful_requests: 9
+2025-10-30 14:45:00 | test_metrics | INFO | Demo - Teste de Performance | success_rate_pct: 92.38093847467405
+2025-10-30 14:45:00 | test_metrics | INFO | Demo - Teste de Performance | response_time_p95_ms: 483.2167320947249
+2025-10-30 14:45:00 | test_metrics | INFO | Demo - Teste de Performance | performance_p95_avaliacao: 483.2167320947249 (Meta: 500) PASSOU
+2025-10-30 14:45:00 | test_metrics | INFO | MÉTRICAS - Demo - Teste de Performance:
+2025-10-30 14:45:00 | test_metrics | INFO | {
+  "test_name": "Demo - Teste de Performance",
+  "start_timestamp": "2025-10-30T14:45:00.195573",
+  "end_timestamp": "2025-10-30T14:45:00.195573",
+  "duration_seconds": 1.5,
+  "results": {
+    "total_requests": 10,
+    "successful_requests": 9,
+    "success_rate_pct": 92.38093847467405,
+    "response_time_p95_ms": 483.2167320947249,
+    "performance_p95_target": 500,
+    "performance_p95_actual": 483.2167320947249,
+    "performance_p95_passed": true
+  }
+}

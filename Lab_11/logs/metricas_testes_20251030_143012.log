@@ -1,0 +1,35 @@
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | target_rate_limit_rpm: 100
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | normal_requests_sent: 50
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | normal_requests_successful: 35
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | normal_success_rate_pct: 70.0
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | excessive_requests_sent: 150
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | excessive_requests_blocked: 28
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | excessive_block_rate_pct: 18.666666666666668
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | control_requests_sent: 30
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | control_requests_successful: 20
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | control_success_rate_pct: 66.66666666666666
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | rate_limiting_detected: False
+2025-10-30 14:44:27 | test_metrics | INFO | Teste de Segurança - Rate Limiting | security_rate_limit_rpm_avaliacao: 0 (Meta: 1) FALHOU
+2025-10-30 14:44:27 | test_metrics | INFO | MÉTRICAS - Teste de Segurança - Rate Limiting:
+2025-10-30 14:44:27 | test_metrics | INFO | {
+  "test_name": "Teste de Segurança - Rate Limiting",
+  "start_timestamp": "2025-10-30T14:30:12.754718",
+  "results": {
+    "target_rate_limit_rpm": 100,
+    "normal_requests_sent": 50,
+    "normal_requests_successful": 35,
+    "normal_success_rate_pct": 70.0,
+    "excessive_requests_sent": 150,
+    "excessive_requests_blocked": 28,
+    "excessive_block_rate_pct": 18.666666666666668,
+    "control_requests_sent": 30,
+    "control_requests_successful": 20,
+    "control_success_rate_pct": 66.66666666666666,
+    "rate_limiting_detected": false,
+    "security_rate_limit_rpm_target": 1,
+    "security_rate_limit_rpm_actual": 0,
+    "security_rate_limit_rpm_passed": false
+  },
+  "end_timestamp": "2025-10-30T14:44:27.254243",
+  "duration_seconds": 854.4995248317719
+}

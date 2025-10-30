@@ -1,0 +1,23 @@
+2025-10-30 14:44:58 | ecommerce_tests | INFO | ================================================================================
+2025-10-30 14:44:59 | ecommerce_tests | INFO | INICIANDO SUITE DE TESTES DE E-COMMERCE
+2025-10-30 14:44:59 | ecommerce_tests | INFO | Total de testes: 1
+2025-10-30 14:44:59 | ecommerce_tests | INFO | Timestamp: 2025-10-30T14:44:59.011930
+2025-10-30 14:44:59 | ecommerce_tests | INFO | ================================================================================
+2025-10-30 14:44:59 | ecommerce_tests | INFO | INICIANDO: Demo - Teste de Performance
+2025-10-30 14:44:59 | ecommerce_tests | INFO | Configuração: {
+  "url": "https://httpbin.org/delay/0.1",
+  "requests": 10,
+  "target_p95_ms": 500
+}
+2025-10-30 14:44:59 | ecommerce_tests | INFO | Enviando 10 requisições...
+2025-10-30 14:45:00 | ecommerce_tests | INFO | P95: 483.22ms (Meta: <500ms)
+2025-10-30 14:45:00 | ecommerce_tests | INFO | CONCLUÍDO: Demo - Teste de Performance
+2025-10-30 14:45:00 | ecommerce_tests | INFO | Duração: 1.5s
+2025-10-30 14:45:00 | ecommerce_tests | INFO | ================================================================================
+2025-10-30 14:45:00 | ecommerce_tests | INFO | 🏁 SUITE DE TESTES CONCLUÍDA
+2025-10-30 14:45:00 | ecommerce_tests | INFO | Total executados: 1
+2025-10-30 14:45:00 | ecommerce_tests | INFO | Aprovados: 1
+2025-10-30 14:45:00 | ecommerce_tests | INFO | Reprovados: 0
+2025-10-30 14:45:00 | ecommerce_tests | INFO | Taxa de sucesso: 100.0%
+2025-10-30 14:45:00 | ecommerce_tests | INFO | Timestamp fim: 2025-10-30T14:45:00.205953
+2025-10-30 14:45:00 | ecommerce_tests | INFO | ================================================================================
